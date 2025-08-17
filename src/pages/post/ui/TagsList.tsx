@@ -6,6 +6,7 @@ import {useArticlesStore} from "@/pages/post";
 import {cn} from "@/shared/lib/utils";
 import {filterArticles, setTags} from '../model/useArticlesStore.slice';
 import {useShallow} from "zustand/react/shallow";
+import {Htag} from "@/shared/ui/htag";
 
 const getTagClasses = (isSelected: boolean, isAllTag: boolean, hasSelectedTag: boolean) => {
     switch (true) {
@@ -35,9 +36,10 @@ export const TagsList = () => {
     if (!tags || tags.length === 0) {
         return <div>No tags found.</div>;
     }
-
+    
     return (
-        <div>
+        <div className={"space-y-3"}>
+            <Htag tag={'h3'}>Теги ({tags.length}):</Htag>
             <ul className="flex flex-wrap gap-3 overflow-hidden w-full">
                 <li>
                     <Badge

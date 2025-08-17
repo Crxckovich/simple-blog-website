@@ -4,6 +4,47 @@
 
 @custom-variant dark (&:is(.dark *));
 
+
+@layer utilities {
+    .text-balance {
+        text-wrap: balance;
+    }
+
+    *::-webkit-scrollbar {
+        height: 5px;
+        width: 5px;
+    }
+
+    *::-webkit-scrollbar-track {
+        background-color: #dfe9ebff;
+        border-radius: 1px;
+        border: 2px dashed #ffffffff;
+    }
+
+    *::-webkit-scrollbar-track:hover {
+        background-color: #adcfd7ff;
+    }
+
+    *::-webkit-scrollbar-track:active {
+        background-color: #b8c0c2ff;
+    }
+
+    *::-webkit-scrollbar-thumb {
+        background-color: #0ea5e9;
+        border-radius: 1px;
+        border: 0px solid #ffffffff;
+    }
+
+    *::-webkit-scrollbar-thumb:hover {
+        background-color: #008fd1ff;
+    }
+
+    *::-webkit-scrollbar-thumb:active {
+        background-color: #0ea5e9;
+    }
+}
+
+
 @theme inline {
     --color-background: var(--background);
     --color-foreground: var(--foreground);

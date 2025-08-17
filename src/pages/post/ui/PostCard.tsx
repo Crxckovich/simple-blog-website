@@ -28,7 +28,7 @@ export const PostCard = ({post}: { post: IPost }) => {
                     </CardContent>
                 </div>
                 <CardFooter className={"flex flex-col gap-5"}>
-                    <ul className="flex gap-2 overflow-hidden w-full">
+                    <ul className="flex flex-wrap gap-2 overflow-hidden w-full">
                         {post.tagList.map((tag) => (
                             <li key={tag}>
                                 <Badge
@@ -39,7 +39,7 @@ export const PostCard = ({post}: { post: IPost }) => {
 
                     <Link href={`articles/${post.slug}`} className={"w-full"}>
                         <Button size={"lg"} className={"w-full bg-sky-500 hover:bg-sky-600"}>
-                            Читать...
+                            Читать
                         </Button>
                     </Link>
 
