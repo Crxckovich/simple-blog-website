@@ -1,1 +1,1 @@
-export {BASE_URL} from "./baseURL"
+export { BASE_URL } from "./baseURL";

@@ -1,1 +1,0 @@
-export {SpecArticlePage} from "./ui/SpecArticlePage"

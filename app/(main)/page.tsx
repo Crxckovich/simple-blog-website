@@ -1,9 +1,9 @@
-import {PostsPage} from "@/pages/post";
+import { ArticlesPage } from "@/pages/articles";
 
 export default function Home() {
-    return (
-        <div>
-            <PostsPage/>
-        </div>
-    );
+  return (
+    <div>
+      <ArticlesPage />
+    </div>
+  );
 }

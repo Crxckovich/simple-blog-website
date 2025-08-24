@@ -1,4 +1,4 @@
-import {Header} from "@/pages/home-page/ui/Header";
+import {Header} from "@/pages/main";
 
 export default async function MainLayout({
                                              children,

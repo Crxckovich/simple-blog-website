@@ -1,42 +1,63 @@
-"use client"
+"use client";
 
-import React from 'react';
-import {useUser} from "@/entities/user/api/getUser";
+import React, {useState} from "react";
+import {CircleUserRound, LogOut, Settings} from "lucide-react";
+import Link from "next/link";
+
 import {Avatar, AvatarFallback, AvatarImage} from "@/shared/ui/avatar";
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
-    DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuShortcut,
-    DropdownMenuTrigger
-} from '@/shared/ui/dropdown-menu';
-import {Skeleton} from "@/shared/ui/skeleton";
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "@/shared/ui/dropdown-menu";
+import {useUserStore} from "@/entities/user";
+import {IUser} from "@/shared/model";
+import {EditProfileDialog} from "./EditProfileDialog";
 
-export const UserButton = () => {
-    const {data, isLoading, error} = useUser()
-
-    if (isLoading) return <Skeleton className={"size-10 shrink-0 overflow-hidden rounded-full"}/>;
-
-    if (error) return <div>An error has occurred: {error.message}</div>;
-
-    if (!data) return <div>No articles found.</div>;
+export const UserButton = ({user}: { user: IUser }) => {
+    const removeUser = useUserStore((state) => state.removeUser);
+    const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-                <Avatar>
-                    <AvatarImage width={10} src={data.image} alt={data.username}/>
-                    <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56" align="start">
-                <DropdownMenuLabel>{data.username}</DropdownMenuLabel>
-                <DropdownMenuSeparator/>
-                <DropdownMenuItem>
-                    Log out
-                    <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
-                </DropdownMenuItem>
-            </DropdownMenuContent>
-        </DropdownMenu>
+        <>
+            <DropdownMenu>
+                <DropdownMenuTrigger asChild className="cursor-pointer">
+                    <Avatar>
+                        <AvatarImage
+                            alt={user.username}
+                            src={user.image ? user.image : "/default.webp"}
+                            width={10}
+                        />
+                        <AvatarFallback>CN</AvatarFallback>
+                    </Avatar>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="start" className="w-56">
+                    <DropdownMenuLabel>@{user.username}</DropdownMenuLabel>
+                    <Link href={`/profiles/${user.username}`}>
+                        <DropdownMenuItem>
+                            <CircleUserRound/>
+                            Профиль
+                        </DropdownMenuItem>
+                    </Link>
+                    <DropdownMenuItem onClick={() => setIsOpen(true)}>
+                        <Settings/>
+                        Настройки
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator/>
+                    <DropdownMenuItem onClick={() => removeUser()}>
+                        <LogOut/>
+                        Выйти
+                    </DropdownMenuItem>
+                </DropdownMenuContent>
+            </DropdownMenu>
+            <EditProfileDialog
+                user={user}
+                isOpen={isOpen}
+                onOpenChange={setIsOpen}
+            />
+        </>
     );
 };

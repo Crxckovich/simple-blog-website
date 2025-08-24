@@ -1,3 +1,4 @@
-export type {IUser} from "./model/types/user.types"
-export {UserButton} from "./ui/UserButton"
-export {UserInfo} from "./ui/UserInfo"
+export { UserButton } from "./ui/UserButton";
+export { UserInfo } from "./ui/UserInfo";
+export { useUserStore } from "./model/store/useUserStore";
+export { getUserByUsername, fetchUserByUsername } from "./api/getUser";

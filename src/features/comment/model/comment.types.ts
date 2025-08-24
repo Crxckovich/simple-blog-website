@@ -1,4 +1,4 @@
-import {IProfile} from "@/shared/model";
+import { IProfile } from "@/shared/model";
 
 export interface IComment {
     id: number,
